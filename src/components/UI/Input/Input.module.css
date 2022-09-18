@@ -1,0 +1,50 @@
+.control{
+    margin: 1rem 0;
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+}
+.control label,
+.control input {
+    display: block;
+}
+.control label {
+    
+    font-weight: bold;
+    flex: 1;
+    color: black;
+    margin-bottom: 0.5rem;
+}
+/* E */
+.control input {
+    max-width:inherit;
+    flex: 3;
+    font: inherit;
+    padding: 0.35rem 0.35rem;
+    border-radius: 6px;
+    border: 1px solid rgb(0, 0, 0);
+}
+input::file-selector-button {
+    border: 2px solid #555555;
+    color: #555555;
+    padding: 8px;
+    border-radius: 4px;
+    background-color: #ffffff;
+}
+input::file-selector-button:hover {
+        background: #f5dffa;
+}
+.control input:focus {
+    outline: none;
+    border-color: #9109ac;
+    background: #f5dffa;
+}
+@media (max-width: 768px) {
+    .control {
+        align-items: center;
+        flex-direction: row;
+    }
+    .control label {
+        padding: 0 10px;
+    }
+}

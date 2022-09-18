@@ -1,0 +1,16 @@
+.storage{
+    width: 90%;
+    max-width: 60rem;
+    margin: 5rem auto;
+    padding: 2rem;
+    background-color: rgb(31, 31, 31);
+}
+.title{
+    color:white;
+    font-size:2rem;
+}
+@media (max-width:766px) {
+    .storage {
+        max-width: 40rem;
+    }
+}

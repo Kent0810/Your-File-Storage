@@ -1,0 +1,19 @@
+.uploader{
+    width: 90%;
+    max-width: 40rem;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #a892ee;
+}
+.actions{
+    text-align: right;
+}
+.uploaderBtn{
+    padding: 0.5rem 1.5rem;
+    font-weight: bold;
+}
+.uploaderHeader{
+    font-size: 1.5rem;
+    color: white;
+    margin-bottom: 0.5rem;
+}

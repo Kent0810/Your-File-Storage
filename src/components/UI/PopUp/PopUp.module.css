@@ -1,0 +1,85 @@
+
+.notification {
+    position: fixed;
+    top: 25vh;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 200 !important;
+    width: 100%;
+    max-width: 40rem;
+    margin: 0 auto;
+    padding: 3.5rem 2rem;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    animation: pop-up 0.5s;
+}
+
+.title{
+    font-weight:500;
+}
+.notificationCheck{
+    position: absolute;
+    transform: translate(0, 45px);
+    top: -45px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    padding: 1.5rem 1.8rem ;
+    border-radius: 50%;
+}
+.red{
+    background-color: red;
+}
+.green{
+    background-color: rgb(132, 200, 30);
+}
+
+.notificationContent{
+   width: 80%;
+   text-align: center;
+   display: flex;
+   flex-direction: column;
+}
+.btn{
+    margin-top: 1rem;
+    background-color: transparent !important;
+    padding: 5px 0;
+}
+.borderRed {
+    border-color: red;
+    color: red;
+}
+
+.borderGreen {
+    border-color: rgb(132, 200, 30);
+    ;
+    color: rgb(132, 200, 30);
+    ;
+}
+
+
+/* KEY FRAMES */
+
+@keyframes pop-up {
+    0% {
+        transform: translate(-50%, 0%) scale(0);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translate(-50%, 0%) scale(1);
+        
+        opacity: 1;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .notificationCheck {
+            padding: 1rem 1.3rem;
+    }
+}
+
