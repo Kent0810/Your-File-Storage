@@ -9,6 +9,11 @@
     color:white;
     font-size:2rem;
 }
+.alert{
+    color: white;
+    font-size: 1.5rem;
+    text-align: center;
+}
 @media (max-width:766px) {
     .storage {
         max-width: 40rem;

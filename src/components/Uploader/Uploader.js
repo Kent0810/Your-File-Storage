@@ -15,6 +15,7 @@ import {
     uploadBytes,
     getDownloadURL,
     listAll,
+    getMetadata
 } from "firebase/storage"
 import { v4 } from 'uuid'
 import styles from './Uploader.module.css'
@@ -33,12 +34,13 @@ const Uploader = (props) => {
     //FILE CONTROLLER
     const [fileUpload, setFileUpload] = useState(null);
     const [fileUrl, setFileUrl] = useState([]);
+    const [fileMetaData, setMetaData] = useState([]);
 
+    //onsubmit
     const submitHandler = (event) => {
         event.preventDefault();
-
         if (typeof ctx.currentUser.uid === 'undefined') {
-            console.log("BUGGED")
+            console.log("Error Occur !")
             setSubmitState(true);
             setErrorName("You Must Be Logged In To Upload")
             return;
@@ -46,25 +48,45 @@ const Uploader = (props) => {
         const fileRef = ref(storage, `files/${ctx.currentUser.uid}/${nameState + '-'}${dateState + '-' + v4()}`)
 
         if (fileUpload == null) return;
-        uploadBytes(fileRef, fileUpload).then((snapshot) => {
-            console.log("UPLOADED")
-            getDownloadURL(snapshot.ref).then((url) => {
-                setFileUrl((prev) => [...prev, url]);
+        uploadBytes(fileRef, fileUpload)
+            .then((snapshot) => {
+                getMetadata(snapshot.ref).then((metadata) => {
+                    setMetaData((prev) => [...prev, metadata.name])
+                })
+                getDownloadURL(snapshot.ref).then((url) => {
+                    setFileUrl((prev) => [...prev, url]);
+                })
+
             })
-        })
         setErrorName('');
         setSubmitState(true);
     }
+    const onReceive = props.onReceive
+    useEffect(() => {
+        if (typeof ctx.currentUser.uid === 'undefined') {
+            setMetaData([])
+            setFileUrl([])
+            return;
+        } else {
+            const fileRef = ref(storage, `files/${ctx.currentUser.uid}`)
+            listAll(fileRef)
+                .then((response) => {
+                    response.items.forEach((item) => {
+                        getMetadata(item).then((metadata) => {
+                            setMetaData((prev) => [...prev, metadata.name])
+                        })
+                        getDownloadURL(item).then((url) => {
+                            setFileUrl((prev) => [...prev, url]);
+                        })
+                    })
+                })
+        }
+    }, [ctx.currentUser.uid])
 
-    // useEffect(() => {
-    //     listAll(fileRef).then((response) => {
-    //         response.items.forEach((item) => {
-    //             getDownloadURL(item).then((url) => {
-    //                 setFileUrl((prev) => [...prev, url]);
-    //             })
-    //         })
-    //     })
-    // }, [])
+    useEffect(() => {
+        onReceive(fileUrl, fileMetaData)
+    }, [fileUrl, fileMetaData])
+
 
     const fileNameHandler = (e) => {
         setName(e.target.value);

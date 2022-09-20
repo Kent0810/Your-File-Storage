@@ -8,6 +8,7 @@ const Storage = (props) => {
     return (
         <Card className={styles.storage}>
             <Header className={styles.title}>Your Storage</Header>
+            {(props.items.length === 0) && <h1 className={styles.alert}>Upload Something To Our Storage !</h1>}
             {props.items.map((item) => (
                 <StorageItem
                     key={item.id}

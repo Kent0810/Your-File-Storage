@@ -17,12 +17,11 @@ export const AuthContextProvider = (props) => {
     //IMPORTANT
     onAuthStateChanged(auth, (user) => {
         if (user) {
-            console.log(user.uid)
             setCurrentUser(user)
             setIsLoggedIn(true)
         } else {
             setIsLoggedIn(false)
-            console.log("Signed Out")
+            console.log("No Current User")
         }
     });
     //CHECK IF USER LOGIN HERE

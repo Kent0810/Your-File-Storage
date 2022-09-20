@@ -28,11 +28,8 @@ const Modal = (props) => {
             emailRef.current.value,
             passwordRef.current.value
         )
-        console.log(user)
         authCtx.onLogin()
-
         props.onConfirm();
-
     }
     return (
         <Card className={styles.modal}>
