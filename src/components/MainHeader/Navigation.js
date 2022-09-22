@@ -22,8 +22,6 @@ const getCurrentUser = async (currentUser) => {
 
 
 const Navigation = () => {
-
-
     const [signUpState, setSignUpState] = useState(false);
     const [loginState, setLoginState] = useState(false);
     const [userName, setUserName] = useState('');
@@ -39,9 +37,11 @@ const Navigation = () => {
     }
     const ctx = useContext(AuthContext);
     //because getCurrentUser return a [object Promise] => use .then to solve
-    getCurrentUser(ctx.currentUser).then(name => {
-        setUserName(name);
-    })
+    if (Object.keys(ctx.currentUser).length !== 0) {
+        getCurrentUser(ctx.currentUser).then(name => {
+            setUserName(name);
+        })
+    }
     return (
         <React.Fragment>
             {signUpState && <SignUpModal onConfirm={onConfirmHandler}></SignUpModal>}
@@ -49,10 +49,10 @@ const Navigation = () => {
             <nav className={styles["nav"]}>
                 <ul>
                     {ctx.isLoggedIn &&
-                        <li><a href="#">{`${userName}`}</a></li>
+                        <li><a href="/#">{`${userName}`}</a></li>
                     }
                     {ctx.isLoggedIn &&
-                        <li><a href="#">Setting</a></li>
+                        <li><a href="/#">Setting</a></li>
                     }
                     {!ctx.isLoggedIn &&
                         <li><Button className={styles["btn"]} onClick={signUpHandler}>Sign Up</Button></li>

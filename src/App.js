@@ -10,6 +10,7 @@ import Uploader from "./components/Uploader/Uploader";
 function App() {
   const [data, setData] = useState([]);
   const onReceive = (fileUrl, fileMetaData) => {
+    //write cmt here please
     var arr = []
     for (var i = 0; i < fileUrl.length; i++) {
       var item = {}

@@ -35,8 +35,8 @@ const Uploader = (props) => {
     const [fileUpload, setFileUpload] = useState(null);
     const [fileUrl, setFileUrl] = useState([]);
     const [fileMetaData, setMetaData] = useState([]);
-
-    //onsubmit
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //ON SUBMIT
     const submitHandler = (event) => {
         event.preventDefault();
         if (typeof ctx.currentUser.uid === 'undefined') {
@@ -61,7 +61,9 @@ const Uploader = (props) => {
         setErrorName('');
         setSubmitState(true);
     }
-    const onReceive = props.onReceive
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    const onReceive = props.onReceive //Lifting State Up
+    //LOADING FILE 
     useEffect(() => {
         if (typeof ctx.currentUser.uid === 'undefined') {
             setMetaData([])
@@ -106,11 +108,11 @@ const Uploader = (props) => {
             }
             <Header className={styles.uploaderHeader}>Upload Your File</Header>
             <form onSubmit={submitHandler}>
-                <Input id='fileName' type='text' onChange={fileNameHandler} value={nameState}>File Name</Input>
-                <Input id='date' type='date' onChange={fileDateHandler} value={dateState}>Date</Input>
+                <Input id='fileName' type='text' onChange={fileNameHandler} value={nameState} required={true}>File Name</Input>
+                <Input id='date' type='date' onChange={fileDateHandler} value={dateState} required={true}>Date</Input>
                 <Input id='file' type='file' onChange={(event) => {
                     setFileUpload(event.target.files[0]);
-                }} value={fileUpload}>File</Input>
+                }} required={true} value={fileUpload}>File</Input>
                 <div className={styles.actions}>
                     <Button className={styles.uploaderBtn} type='submut' >Submit</Button>
                 </div>
