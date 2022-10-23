@@ -58,6 +58,7 @@ const Uploader = (props) => {
                 })
 
             })
+
         setErrorName('');
         setSubmitState(true);
     }
